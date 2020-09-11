@@ -1,0 +1,42 @@
+{
+  "name": "rokclimb15/virin",
+  "type": "library",
+  "description": "A PHP library for validating and parsing DoD Visual Information Record Identification Number (VIRIN).",
+  "keywords": [
+    "validate",
+    "virin",
+    "php"
+  ],
+  "homepage": "https://github.com/rokclimb15/virin",
+  "license": "MIT",
+  "require": {
+    "php": "^7.2 || ^8"
+  },
+  "require-dev": {
+    "php-parallel-lint/php-parallel-lint": "^1.1",
+    "phpstan/phpstan": "^0.12",
+    "phpunit/phpunit": "^9.3"
+  },
+  "autoload": {
+    "psr-4": {
+      "Rokclimb15\\Virin\\": "src/"
+    }
+  },
+  "scripts": {
+    "lint": "parallel-lint src tests",
+    "phpstan": [
+      "phpstan analyse -c tests/phpstan.neon --no-progress"
+    ],
+    "phpunit": "phpunit --verbose --colors=always",
+    "phpunit-coverage": "phpunit --verbose --colors=always --coverage-html build/coverage",
+    "test": [
+      "@lint",
+      "@phpstan",
+      "@phpunit"
+    ]
+  },
+  "support": {
+    "issues": "https://github.com/rokclimb15/virin/issues",
+    "source": "https://github.com/rokclimb15/virin"
+  }
+}
