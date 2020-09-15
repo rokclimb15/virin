@@ -1,5 +1,5 @@
 # VIRIN
-A PHP library for validating and parsing [DoD Visual Information Record Identification Number](https://dimoc.mil/Submit-DoD-VI/Digital-VI-Toolkit-read-first/Create-a-VIRIN/) (VIRIN)
+A PHP library for validating and parsing [DoD Visual Information Record Identification Number](https://www.dimoc.mil/Submit-DoD-VI/Digital-VI-Toolkit-read-first/Create-a-VIRIN/) (VIRIN)
 
 # Usage
 
