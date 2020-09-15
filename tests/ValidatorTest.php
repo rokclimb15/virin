@@ -29,7 +29,15 @@ class ValidatorTest extends PhpUnitTestCase
                 'expected' => true,
             ],
             [
+                'value' => '180515-A-A0987-100',
+                'expected' => true,
+            ],
+            [
                 'value' => '180515-A-AA987-1001',
+                'expected' => true,
+            ],
+            [
+                'value' => '180515-A-A0987-1001',
                 'expected' => true,
             ],
             [
@@ -37,7 +45,15 @@ class ValidatorTest extends PhpUnitTestCase
                 'expected' => true,
             ],
             [
+                'value' => '180515-A-A0987-100-BE',
+                'expected' => true,
+            ],
+            [
                 'value' => '180515-A-AA987-1001-BE',
+                'expected' => true,
+            ],
+            [
+                'value' => '180515-A-A0987-1001-BE',
                 'expected' => true,
             ],
             [
@@ -45,7 +61,15 @@ class ValidatorTest extends PhpUnitTestCase
                 'expected' => true,
             ],
             [
+                'value' => '180515-D-A0987-1001-BE',
+                'expected' => true,
+            ],
+            [
                 'value' => '180515-F-AA987-1001-BE',
+                'expected' => true,
+            ],
+            [
+                'value' => '180515-F-A0987-1001-BE',
                 'expected' => true,
             ],
             [
@@ -53,7 +77,15 @@ class ValidatorTest extends PhpUnitTestCase
                 'expected' => true,
             ],
             [
+                'value' => '180515-G-A0987-1001-BE',
+                'expected' => true,
+            ],
+            [
                 'value' => '180515-H-AA987-1001-BE',
+                'expected' => true,
+            ],
+            [
+                'value' => '180515-H-A0987-1001-BE',
                 'expected' => true,
             ],
             [
@@ -61,7 +93,15 @@ class ValidatorTest extends PhpUnitTestCase
                 'expected' => true,
             ],
             [
+                'value' => '180515-M-A0987-1001-BE',
+                'expected' => true,
+            ],
+            [
                 'value' => '180515-N-AA987-1001-BE',
+                'expected' => true,
+            ],
+            [
+                'value' => '180515-N-A0987-1001-BE',
                 'expected' => true,
             ],
             [
@@ -69,7 +109,15 @@ class ValidatorTest extends PhpUnitTestCase
                 'expected' => true,
             ],
             [
+                'value' => '180515-O-A0987-1001-BE',
+                'expected' => true,
+            ],
+            [
                 'value' => '180515-S-AA987-1001-BE',
+                'expected' => true,
+            ],
+            [
+                'value' => '180515-S-A0987-1001-BE',
                 'expected' => true,
             ],
             [
@@ -77,11 +125,23 @@ class ValidatorTest extends PhpUnitTestCase
                 'expected' => true,
             ],
             [
+                'value' => '180515-Z-A0987-1001-BE',
+                'expected' => true,
+            ],
+            [
                 'value' => '18051-A-AA987-100',
                 'expected' => false,
             ],
             [
+                'value' => '18051-A-A0987-100',
+                'expected' => false,
+            ],
+            [
                 'value' => '180515-C-AA987-100',
+                'expected' => false,
+            ],
+            [
+                'value' => '180515-C-A0987-100',
                 'expected' => false,
             ],
             [
@@ -94,6 +154,10 @@ class ValidatorTest extends PhpUnitTestCase
             ],
             [
                 'value' => '180515-A-A987-1001-BE',
+                'expected' => false,
+            ],
+            [
+                'value' => '180515-A-AA987A1234-1001-BE',
                 'expected' => false,
             ],
         ];

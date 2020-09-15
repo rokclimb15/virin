@@ -12,7 +12,7 @@ class Validator
     /**
      * Regular expression pattern for matching a VIRIN.
      */
-    protected const VALID_PATTERN = '[0-9]{6}-[A|D|F|G|H|M|N|O|S|Z]-[A-Z]{2}[0-9]{3}-[0-9]{3,4}(-[A-Z]{2})?';
+    protected const VALID_PATTERN = '[0-9]{6}-[A|D|F|G|H|M|N|O|S|Z]-([A-Z]{2}[0-9]{3}|[A-Z]{1}[0-9]{4})-[0-9]{3,4}(-[A-Z]{2})?';
 
     /**
      * Validates that string $virin is a syntactically valid VIRIN
