@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Rokclimb15\Virin\Test\Validator;
+namespace Rokclimb15\Virin\Test;
 
 use Rokclimb15\Virin\Validator;
 use function BenTools\CartesianProduct\cartesian_product;

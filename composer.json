@@ -23,6 +23,11 @@
       "Rokclimb15\\Virin\\": "src/"
     }
   },
+  "autoload-dev": {
+    "psr-4": {
+      "Rokclimb15\\Virin\\Test\\": "tests/"
+    }
+  },
   "scripts": {
     "lint": "parallel-lint src tests",
     "phpstan": [
