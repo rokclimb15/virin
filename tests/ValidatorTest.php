@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Rokclimb15\Virin\Test\Validator;
 
 use Rokclimb15\Virin\Validator;
+use function BenTools\CartesianProduct\cartesian_product;
 use PHPUnit\Framework\TestCase as PhpUnitTestCase;
 
 class ValidatorTest extends PhpUnitTestCase
@@ -23,143 +24,79 @@ class ValidatorTest extends PhpUnitTestCase
 
     public function valuesForValidation(): array
     {
-        return [
-            [
-                'value' => '180515-A-AA987-100',
-                'expected' => true,
+        return array_merge($this->getValidVirinsForValidation(), $this->getInvalidVirinsForValidation());
+    }
+
+    protected function getValidVirinsForValidation(): array
+    {
+        $parts = [
+            'field1' => [
+                '180515',
             ],
-            [
-                'value' => '180515-A-A0987-100',
-                'expected' => true,
+            'field2' => [
+                'A',
+                'D',
+                'F',
+                'G',
+                'H',
+                'M',
+                'N',
+                'O',
+                'S',
+                'Z',
             ],
-            [
-                'value' => '180515-A-AA987-1001',
-                'expected' => true,
+            'field3' => [
+                'AA987',
+                'A0987'
             ],
-            [
-                'value' => '180515-A-A0987-1001',
-                'expected' => true,
+            'field4' => [
+                '100',
+                '1001',
             ],
-            [
-                'value' => '180515-A-AA987-100-BE',
-                'expected' => true,
-            ],
-            [
-                'value' => '180515-A-A0987-100-BE',
-                'expected' => true,
-            ],
-            [
-                'value' => '180515-A-AA987-1001-BE',
-                'expected' => true,
-            ],
-            [
-                'value' => '180515-A-A0987-1001-BE',
-                'expected' => true,
-            ],
-            [
-                'value' => '180515-D-AA987-1001-BE',
-                'expected' => true,
-            ],
-            [
-                'value' => '180515-D-A0987-1001-BE',
-                'expected' => true,
-            ],
-            [
-                'value' => '180515-F-AA987-1001-BE',
-                'expected' => true,
-            ],
-            [
-                'value' => '180515-F-A0987-1001-BE',
-                'expected' => true,
-            ],
-            [
-                'value' => '180515-G-AA987-1001-BE',
-                'expected' => true,
-            ],
-            [
-                'value' => '180515-G-A0987-1001-BE',
-                'expected' => true,
-            ],
-            [
-                'value' => '180515-H-AA987-1001-BE',
-                'expected' => true,
-            ],
-            [
-                'value' => '180515-H-A0987-1001-BE',
-                'expected' => true,
-            ],
-            [
-                'value' => '180515-M-AA987-1001-BE',
-                'expected' => true,
-            ],
-            [
-                'value' => '180515-M-A0987-1001-BE',
-                'expected' => true,
-            ],
-            [
-                'value' => '180515-N-AA987-1001-BE',
-                'expected' => true,
-            ],
-            [
-                'value' => '180515-N-A0987-1001-BE',
-                'expected' => true,
-            ],
-            [
-                'value' => '180515-O-AA987-1001-BE',
-                'expected' => true,
-            ],
-            [
-                'value' => '180515-O-A0987-1001-BE',
-                'expected' => true,
-            ],
-            [
-                'value' => '180515-S-AA987-1001-BE',
-                'expected' => true,
-            ],
-            [
-                'value' => '180515-S-A0987-1001-BE',
-                'expected' => true,
-            ],
-            [
-                'value' => '180515-Z-AA987-1001-BE',
-                'expected' => true,
-            ],
-            [
-                'value' => '180515-Z-A0987-1001-BE',
-                'expected' => true,
-            ],
-            [
-                'value' => '18051-A-AA987-100',
-                'expected' => false,
-            ],
-            [
-                'value' => '18051-A-A0987-100',
-                'expected' => false,
-            ],
-            [
-                'value' => '180515-C-AA987-100',
-                'expected' => false,
-            ],
-            [
-                'value' => '180515-C-A0987-100',
-                'expected' => false,
-            ],
-            [
-                'value' => '180515-A-A987-100',
-                'expected' => false,
-            ],
-            [
-                'value' => '180515-A-A987-1001',
-                'expected' => false,
-            ],
-            [
-                'value' => '180515-A-A987-1001-BE',
-                'expected' => false,
-            ],
-            [
-                'value' => '180515-A-AA987A1234-1001-BE',
-                'expected' => false,
+            'field5' => [
+                null,
+                'BE',
             ],
         ];
+
+        $virins = [];
+
+        foreach (cartesian_product($parts) as $part) {
+            if ($part['field5'] !== null) {
+                $virins[] = [sprintf('%s-%s-%s-%s-%s', $part['field1'], $part['field2'], $part['field3'], $part['field4'], $part['field5']), true];
+            } else {
+                $virins[] = [sprintf('%s-%s-%s-%s', $part['field1'], $part['field2'], $part['field3'], $part['field4']), true];
+            }
+        }
+
+        return $virins;
+    }
+
+    protected function getInvalidVirinsForValidation(): array
+    {
+        $parts = [
+            'field1' => [
+                '18051',
+            ],
+            'field2' => [
+                'C',
+            ],
+            'field3' => [
+                'A987',
+                '0987'
+            ],
+            'field4' => [
+                '10',
+                '10011',
+            ],
+        ];
+
+        $virins = [];
+
+        foreach (cartesian_product($parts) as $part) {
+            $virins[] = [sprintf('%s-%s-%s-%s', $part['field1'], $part['field2'], $part['field3'], $part['field4']), false];
+        }
+
+        return $virins;
     }
 }
