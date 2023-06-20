@@ -14,7 +14,7 @@ class Parser
     /**
      * Regular expression pattern for parsing a VIRIN.
      */
-    protected const CAPTURE_PATTERN = '^([0-9]{6})-([A|D|F|G|H|M|N|O|S|Z])-([A-Z]{2}[0-9]{3}|[A-Z]{1}[0-9]{4})-([0-9]{3,4})(?:-([A-Z]{2}))?$';
+    protected const CAPTURE_PATTERN = '^([0-9]{6})-([A|D|F|G|H|M|N|O|S|Z])-([A-Z]{2}[0-9]{3}|[A-Z][0-9]{4})-([0-9]{3,4})(?:-([A-Z]{2}))?$';
 
     protected $field1;
     protected $field2;

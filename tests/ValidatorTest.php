@@ -50,7 +50,6 @@ class ValidatorTest extends PhpUnitTestCase
                 'A0987'
             ],
             'field4' => [
-                '100',
                 '1001',
             ],
             'field5' => [
@@ -87,7 +86,11 @@ class ValidatorTest extends PhpUnitTestCase
             ],
             'field4' => [
                 '10',
+                '100',
                 '10011',
+                '001',
+                '0001',
+                '11a',
             ],
         ];
 
