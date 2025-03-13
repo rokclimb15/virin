@@ -22,12 +22,12 @@ class ValidatorTest extends PhpUnitTestCase
         $this->assertSame($expected, $validator->validate($value));
     }
 
-    public function valuesForValidation(): array
+    public static function valuesForValidation(): array
     {
-        return array_merge($this->getValidVirinsForValidation(), $this->getInvalidVirinsForValidation());
+        return array_merge(static::getValidVirinsForValidation(), static::getInvalidVirinsForValidation());
     }
 
-    protected function getValidVirinsForValidation(): array
+    protected static function getValidVirinsForValidation(): array
     {
         $parts = [
             'field1' => [
@@ -71,7 +71,7 @@ class ValidatorTest extends PhpUnitTestCase
         return $virins;
     }
 
-    protected function getInvalidVirinsForValidation(): array
+    protected static function getInvalidVirinsForValidation(): array
     {
         $parts = [
             'field1' => [

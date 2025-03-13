@@ -14,7 +14,8 @@ class ParserTest extends PhpUnitTestCase
     /**
      * @dataProvider valuesForParsing
      * @param string $value
-     * @param bool $expected
+     * @param array $expected
+     * @throws Exception
      */
     public function testParse(string $value, array $expected): void
     {
@@ -57,12 +58,12 @@ class ParserTest extends PhpUnitTestCase
         $parser->getDateTime();
     }
 
-    public function valuesForParsing(): array
+    public static function valuesForParsing(): array
     {
-        return $this->getValidVirinsForParsing();
+        return static::getValidVirinsForParsing();
     }
 
-    protected function getValidVirinsForParsing(): array
+    protected static function getValidVirinsForParsing(): array
     {
         $parts = [
             'field1' => [
