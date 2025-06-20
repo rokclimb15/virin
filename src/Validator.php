@@ -14,6 +14,8 @@ class Validator
      */
     protected const VALID_PATTERN = '^[0-9]{6}-[A|D|F|G|H|M|N|O|S|X|Z]-([A-Z]{2}[0-9]{3}|[A-Z][0-9]{4})-[1-9][0-9]{3}(-[A-Z]{2})?$';
 
+    protected $allowThreeDigitFieldFour = false;
+
     /**
      * Validates that string $virin is a syntactically valid VIRIN
      *
@@ -22,6 +24,21 @@ class Validator
      */
     public function validate(string $virin): bool
     {
-        return (bool)preg_match('/' . self::VALID_PATTERN . '/', $virin);
+        $pattern = self::VALID_PATTERN;
+        if ($this->allowThreeDigitFieldFour) {
+            // Allow field 4 to be 3 digits instead of 4
+            $pattern = str_replace('-[1-9][0-9]{3}(-[A-Z]{2})?', '-([1-9][0-9]{3}(-[A-Z]{2})?|[0-9]{3})', $pattern);
+        }
+        return (bool)preg_match('/' . $pattern . '/', $virin);
+    }
+
+    public function setAllowThreeDigitFieldFour(bool $allow): void
+    {
+        $this->allowThreeDigitFieldFour = $allow;
+    }
+
+    public function getAllowThreeDigitFieldFour(): bool
+    {
+        return $this->allowThreeDigitFieldFour;
     }
 }

@@ -87,6 +87,11 @@ class Parser
         return $this->field4;
     }
 
+    public function hasThreeDigitSequence(): bool
+    {
+        return strlen($this->field4) === 3;
+    }
+
     public function getIso2CountryCode(): ?string
     {
         return $this->field5;

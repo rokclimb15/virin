@@ -22,12 +22,30 @@ class ValidatorTest extends PhpUnitTestCase
         $this->assertSame($expected, $validator->validate($value));
     }
 
+    /**
+     * @dataProvider valuesForValidationWithThreeDigitFieldFour
+     * @param string $value
+     * @param bool $expected
+     */
+    public function testValidateWithThreeDigitFieldFour(string $value, bool $expected): void
+    {
+        $validator = new Validator();
+        $validator->setAllowThreeDigitFieldFour(true);
+
+        $this->assertSame($expected, $validator->validate($value));
+    }
+
     public static function valuesForValidation(): array
     {
         return array_merge(static::getValidVirinsForValidation(), static::getInvalidVirinsForValidation());
     }
 
-    protected static function getValidVirinsForValidation(): array
+    public static function valuesForValidationWithThreeDigitFieldFour(): array
+    {
+        return array_merge(static::getValidVirinsForValidation(true), static::getInvalidVirinsForValidation(true));
+    }
+
+    protected static function getValidVirinsForValidation(bool $allowThreeDigitFieldFour = false): array
     {
         $parts = [
             'field1' => [
@@ -59,10 +77,16 @@ class ValidatorTest extends PhpUnitTestCase
             ],
         ];
 
+        if ($allowThreeDigitFieldFour) {
+            $parts['field4'][] = '100';
+            $parts['field4'][] = '001';
+        }
+
         $virins = [];
 
         foreach (cartesian_product($parts) as $part) {
-            if ($part['field5'] !== null) {
+            // Only add field5 if field4 is 4 digits long
+            if ($part['field5'] !== null && strlen($part['field4']) > 3) {
                 $virins[] = [sprintf('%s-%s-%s-%s-%s', $part['field1'], $part['field2'], $part['field3'], $part['field4'], $part['field5']), true];
             } else {
                 $virins[] = [sprintf('%s-%s-%s-%s', $part['field1'], $part['field2'], $part['field3'], $part['field4']), true];
@@ -72,7 +96,7 @@ class ValidatorTest extends PhpUnitTestCase
         return $virins;
     }
 
-    protected static function getInvalidVirinsForValidation(): array
+    protected static function getInvalidVirinsForValidation(bool $allowThreeDigitFieldFour = false): array
     {
         $parts = [
             'field1' => [
@@ -87,13 +111,16 @@ class ValidatorTest extends PhpUnitTestCase
             ],
             'field4' => [
                 '10',
-                '100',
                 '10011',
-                '001',
                 '0001',
                 '11a',
             ],
         ];
+
+        if (!$allowThreeDigitFieldFour) {
+            $parts['field4'][] = '100';
+            $parts['field4'][] = '001';
+        }
 
         $virins = [];
 

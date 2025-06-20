@@ -35,6 +35,9 @@ class ParserTest extends PhpUnitTestCase
 
         $hasVisionId = ctype_alpha(substr($expected[2], 0, 2));
 
+        $expectThreeDigitSequence = strlen($expected[3]) === 3;
+        $this->assertSame($expectThreeDigitSequence, $parser->hasThreeDigitSequence());
+
         $this->assertSame(!$hasVisionId, $parser->hasDvian());
         $this->assertSame($hasVisionId, $parser->hasVisionId());
     }
