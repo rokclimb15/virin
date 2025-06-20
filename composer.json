@@ -10,7 +10,8 @@
   "homepage": "https://github.com/rokclimb15/virin",
   "license": "MIT",
   "require": {
-    "php": "^8.1"
+    "php": "^8.1",
+    "ext-ctype": "*"
   },
   "require-dev": {
     "php-parallel-lint/php-parallel-lint": "^1.3",
