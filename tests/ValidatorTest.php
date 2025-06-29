@@ -35,6 +35,19 @@ class ValidatorTest extends PhpUnitTestCase
         $this->assertSame($expected, $validator->validate($value));
     }
 
+    /**
+     * @dataProvider valuesForValidationWithLegacyIdentifier
+     * @param string $value
+     * @param bool $expected
+     */
+    public function testValidateWithLegacyIdentifier(string $value, bool $expected): void
+    {
+        $validator = new Validator();
+        $validator->setAllowLegacyIdentifier(true);
+
+        $this->assertSame($expected, $validator->validate($value));
+    }
+
     public static function valuesForValidation(): array
     {
         return array_merge(static::getValidVirinsForValidation(), static::getInvalidVirinsForValidation());
@@ -45,7 +58,12 @@ class ValidatorTest extends PhpUnitTestCase
         return array_merge(static::getValidVirinsForValidation(true), static::getInvalidVirinsForValidation(true));
     }
 
-    protected static function getValidVirinsForValidation(bool $allowThreeDigitFieldFour = false): array
+    public static function valuesForValidationWithLegacyIdentifier(): array
+    {
+        return array_merge(static::getValidVirinsForValidation(false, true), static::getInvalidVirinsForValidation(false, true));
+    }
+
+    protected static function getValidVirinsForValidation(bool $allowThreeDigitFieldFour = false, bool $allowLegacyIdentifier = false): array
     {
         $parts = [
             'field1' => [
@@ -82,6 +100,10 @@ class ValidatorTest extends PhpUnitTestCase
             $parts['field4'][] = '001';
         }
 
+        if ($allowLegacyIdentifier) {
+            $parts['field3'][] = '1234A';
+        }
+
         $virins = [];
 
         foreach (cartesian_product($parts) as $part) {
@@ -96,7 +118,7 @@ class ValidatorTest extends PhpUnitTestCase
         return $virins;
     }
 
-    protected static function getInvalidVirinsForValidation(bool $allowThreeDigitFieldFour = false): array
+    protected static function getInvalidVirinsForValidation(bool $allowThreeDigitFieldFour = false, bool $allowLegacyIdentifier = false): array
     {
         $parts = [
             'field1' => [
@@ -120,6 +142,10 @@ class ValidatorTest extends PhpUnitTestCase
         if (!$allowThreeDigitFieldFour) {
             $parts['field4'][] = '100';
             $parts['field4'][] = '001';
+        }
+
+        if (!$allowLegacyIdentifier) {
+            $parts['field3'][] = '1234A';
         }
 
         $virins = [];
