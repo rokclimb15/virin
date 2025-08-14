@@ -82,6 +82,7 @@ class ParserTest extends PhpUnitTestCase
                 'N',
                 'O',
                 'S',
+                'U',
                 'X',
                 'Z',
             ],

@@ -79,6 +79,7 @@ class ValidatorTest extends PhpUnitTestCase
                 'N',
                 'O',
                 'S',
+                'U',
                 'X',
                 'Z',
             ],
